@@ -10,6 +10,7 @@ bool         sending = false;
 const string script  = IO::FromStorageFolder("UCannotPlay.py");
 const string task    = IO::FromStorageFolder("UCannotPlay.xml");
 const uint64 timeout = 5000;
+const string version = IO::FromStorageFolder("version.txt");
 
 #if TMNEXT
 const uint16 year = 2020;
@@ -21,6 +22,46 @@ const uint16 year = 2016;
 bool S_Enabled = true;
 
 void Main() {
+    if (IO::FileExists(version)) {
+        IO::File read(version, IO::FileMode::Read);
+        const string v = read.ReadToEnd();
+        read.Close();
+        trace("previous plugin version: " + v);
+
+        // if (v != pluginMeta.Version) {
+        //     trace("plugin updated, was: " + v);
+
+        //     if (IO::FileExists(script)) {
+        //         try {
+        //             IO::Delete(script);
+        //         } catch {
+        //             error("failed to delete script file: " + getExceptionInfo());
+        //             NotifyError("problem with plugin update, check log and contact Ezio if needed");
+        //             return;
+        //         }
+        //     }
+
+        //     if (IO::FileExists(task)) {
+        //         try {
+        //             IO::Delete(task);
+        //         } catch {
+        //             error("failed to delete task file: " + getExceptionInfo());
+        //             NotifyError("problem with plugin update, check log and contact Ezio if needed");
+        //             return;
+        //         }
+        //     }
+        // }
+    }
+
+    try {
+        IO::File write(version, IO::FileMode::Write);
+        write.Write(pluginMeta.Version);
+        write.Close();
+    } catch {
+        error("failed to write version file: " + getExceptionInfo());
+        NotifyError("failed to write file, check log and contact Ezio if needed");
+    }
+
     if (!IO::FileExists(script)) {
         enabled = false;
         trace("writing script file");
