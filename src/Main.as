@@ -117,7 +117,17 @@ void SendAsync() {
 
 [SettingsTab name="Setup" icon="Cogs"]
 void SettingsTab_Setup() {
-    UI::TextWrapped("it is recommended that you run this script with Task Scheduler, but you may run it however you like.");
+    UI::TextWrapped("it is recommended that you run this script with Task Scheduler, but you may run it however you like");
+
+    UI::TextWrapped(
+        "if you already set this up for Trackmania "
+#if TMNEXT
+        "Turbo"
+#elif TURBO
+        "(2020)"
+#endif
+        ", you don't need to do anything here"
+    );
 
     UI::Separator();
 
