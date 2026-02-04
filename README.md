@@ -4,7 +4,7 @@
 
 # UCannotPlay
 
-Ends the Ubisoft Connect process after exiting the game. This prevents some annoyance from the window popping up and allows you to put your PC to sleep without having to sign back into it afterwards.
+Ends the Ubisoft Connect process after exiting the game. This prevents some annoyance from the window popping up and allows you to put your PC to sleep without having to sign back into the program afterwards.
 
 It's recommended that you use Windows Task Scheduler to run the accompanying Python script, but it is not necessary.
 
