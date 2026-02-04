@@ -4,7 +4,7 @@
 
 # UCannotPlay
 
-Kills the Ubisoft Connect process after exiting the game. This prevents some annoyance from the window popping up and allows you to put your PC to sleep without having to sign back into the program afterwards.
+Kills the Ubisoft Connect process after exiting the game. This prevents some annoyance from the window popping up and allows you to put your PC to sleep without having to sign back into the program afterwards. If you use this for Trackmania (2020) and Trackmania Turbo, you only need to set up the task once.
 
 It's recommended that you use Windows Task Scheduler to run the accompanying Python script, but it is not necessary.
 
