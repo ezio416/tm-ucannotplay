@@ -57,11 +57,14 @@ void RenderMenu() {
     }
 }
 
+void NotifyError(const string&in msg) {
+    error(msg);
+    UI::ShowNotification(pluginTitle, msg, vec4(1.0f, 0.0f, 0.0f, 0.8f));
+}
+
 void SendAsync() {
     if (!enabled) {
-        const string msg = "plugin needs to be reloaded after your task is set up";
-        error(msg);
-        UI::ShowNotification(pluginTitle, msg, vec4(1.0f, 0.5f, 0.0f, 0.8f));
+        NotifyError("plugin needs to be reloaded after your task is set up");
         return;
     }
 
@@ -76,9 +79,7 @@ void SendAsync() {
     Net::Socket@ sock = Net::Socket();
 
     if (!sock.Connect(host, port)) {
-        const string msg = "failed to connect socket";
-        error(msg);
-        UI::ShowNotification(pluginTitle, msg, vec4(1.0f, 0.5f, 0.0f, 0.8f));
+        NotifyError("failed to connect socket");
         sending = false;
         return;
     }
@@ -88,9 +89,7 @@ void SendAsync() {
         yield();
 
         if (Time::Now - start > timeout) {
-            const string msg = "socket failed to respond, is your Python script running?";
-            error(msg);
-            UI::ShowNotification(pluginTitle, msg, vec4(1.0f, 0.5f, 0.0f, 0.8f));
+            NotifyError("socket failed to respond, is your Python script running?");
             sock.Close();
             return;
         }
