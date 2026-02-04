@@ -117,12 +117,20 @@ void SendAsync() {
 
 [SettingsTab name="Setup" icon="Cogs"]
 void SettingsTab_Setup() {
-    UI::TextWrapped("It is recommended that you run this script with Task Scheduler, but you may run it however you like.");
+    UI::TextWrapped("it is recommended that you run this script with Task Scheduler, but you may run it however you like.");
 
     UI::Separator();
 
-    if (UI::Selectable('Script location: "' + script + '"', false)) {
+    if (UI::Selectable('script location: "' + script + '"', false)) {
         IO::SetClipboard(script);
     }
     UI::SetItemTooltip("copy");
+
+    UI::Separator();
+
+    UI::TextWrapped("after your script is running, reload the plugin:");
+
+    if (UI::Button(Icons::Refresh + "reload")) {
+        Meta::ReloadPlugin(pluginMeta);
+    }
 }
