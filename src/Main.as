@@ -130,7 +130,7 @@ void SettingsTab_Setup() {
 
     UI::TextWrapped("after your script is running, reload the plugin:");
 
-    if (UI::Button(Icons::Refresh + "reload")) {
+    if (UI::Button(Icons::Refresh + " reload")) {
         Meta::ReloadPlugin(pluginMeta);
     }
 }
