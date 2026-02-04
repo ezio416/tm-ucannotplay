@@ -1,12 +1,12 @@
-# c 2025-08-12
-# m 2026-02-03
+'''
+c 2025-08-12
+m 2026-02-03
 
-# This Python script will automatically kill the Ubisoft Connect process after a game closes
-# Ubisoft Connect has an issue where if it is left running while the PC is put to sleep, it will sign the user out
-# It is intended for use with the UCannotPlay plugin in Openplanet - https://openplanet.dev/plugin/UCannotPlay
-
-# Run this script in Task Scheduler:
-#   -
+This Python script will automatically kill the Ubisoft Connect process after a game closes
+Ubisoft Connect has an issue where if it is left running while the PC is put to sleep, it will sign the user out
+This is intended for use with the UCannotPlay plugin in Openplanet - https://openplanet.dev/plugin/UCannotPlay
+It is recommended that you run this script with Task Scheduler, but you may run it however you like
+'''
 
 import os
 import socket
