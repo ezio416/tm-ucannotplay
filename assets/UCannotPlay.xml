@@ -45,7 +45,7 @@
   </Settings>
   <Actions Context="Author">
     <Exec>
-      <Command>python</Command>
+      <Command>pythonw</Command>
       <Arguments>-u {script-path}</Arguments>
     </Exec>
   </Actions>
