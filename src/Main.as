@@ -122,7 +122,7 @@ void SettingsTab_Setup() {
     UI::Separator();
 
     if (UI::Selectable('Script location: "' + script + '"', false)) {
-        IO::SetClipboard(Path::GetDirectoryName(script));
+        IO::SetClipboard(script);
     }
     UI::SetItemTooltip("copy");
 }
