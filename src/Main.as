@@ -8,7 +8,6 @@ const string host    = "127.0.0.1";
 const uint16 port    = 4162;
 bool         sending = false;
 const string script  = IO::FromStorageFolder("UCannotPlay.py");
-const string task    = IO::FromStorageFolder("UCannotPlay.xml");
 const uint64 timeout = 5000;
 const string version = IO::FromStorageFolder("version.txt");
 
@@ -27,30 +26,6 @@ void Main() {
         const string v = read.ReadToEnd();
         read.Close();
         trace("previous plugin version: " + v);
-
-        // if (v != pluginMeta.Version) {
-        //     trace("plugin updated, was: " + v);
-
-        //     if (IO::FileExists(script)) {
-        //         try {
-        //             IO::Delete(script);
-        //         } catch {
-        //             error("failed to delete script file: " + getExceptionInfo());
-        //             NotifyError("problem with plugin update, check log and contact Ezio if needed");
-        //             return;
-        //         }
-        //     }
-
-        //     if (IO::FileExists(task)) {
-        //         try {
-        //             IO::Delete(task);
-        //         } catch {
-        //             error("failed to delete task file: " + getExceptionInfo());
-        //             NotifyError("problem with plugin update, check log and contact Ezio if needed");
-        //             return;
-        //         }
-        //     }
-        // }
     }
 
     try {
@@ -71,17 +46,6 @@ void Main() {
         storageFile.Write(contents);
         storageFile.Close();
         trace("wrote script file");
-    }
-
-    if (!IO::FileExists(task)) {
-        enabled = false;
-        trace("writing task file");
-        IO::FileSource assetsFile("assets/UCannotPlay.xml");
-        const string contents = assetsFile.ReadToEnd();
-        IO::File storageFile(task, IO::FileMode::Write);
-        storageFile.Write(contents.Replace("{script-path}", '"' + script + '"'));
-        storageFile.Close();
-        trace("wrote task file");
     }
 
     SendAsync();
@@ -149,4 +113,16 @@ void SendAsync() {
     sock.Close();
 
     sending = false;
+}
+
+[SettingsTab name="Setup" icon="Cogs"]
+void SettingsTab_Setup() {
+    UI::TextWrapped("It is recommended that you run this script with Task Scheduler, but you may run it however you like.");
+
+    UI::Separator();
+
+    if (UI::Selectable('Script location: "' + script + '"', false)) {
+        IO::SetClipboard(Path::GetDirectoryName(script));
+    }
+    UI::SetItemTooltip("copy");
 }
